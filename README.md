@@ -1,2 +1,2 @@
-# bootstrap-cebir-2019
-Bootstrapworld cebir belge ve racket dosyaları 2019
+# bootstrapworld-NMK-2019
+Bootstrapworld NMK belge ve racket dosyaları 2019
