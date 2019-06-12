@@ -1,0 +1,5 @@
+#Buradaki en-tr çeviriler genel bir tutarlılık sağlamak için oluşturulmuştur.
+
+
+contract = Sözleşme
+circle of evaluation = değerlendirme çemberi

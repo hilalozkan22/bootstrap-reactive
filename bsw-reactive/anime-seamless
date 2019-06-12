@@ -1,0 +1,98 @@
+(define WALLPAPER-REPEAT (bitmap "imaj/seamless.jpg"))
+(define TUŞ-ADIM 5)
+
+(define (concat-image-right i1 i2)
+  (let*
+      ((i1h (image-height i1))(i2h (image-height i2))(i1w (image-width i1))(i2w (image-width i2)))
+    (place-image/align i1 0 0 "left" "top"
+                        (place-image/align i2 i1w 0 "left" "top"
+                                           (rectangle (+ i1w i2w) (max i1h i2h) "solid" "white")))))
+
+(define (concat-image-down i1 i2)
+  (let*
+      ((i1h (image-height i1))(i2h (image-height i2))(i1w (image-width i1))(i2w (image-width i2)))
+    (place-image/align i1 0 0 "left" "top"
+                        (place-image/align i2 0 i1h "left" "top"
+                                           (rectangle (max i1w i2w) (+ i1h i2h) "solid" "white")))))
+
+(define (create-seamless-wallpaper-from-seamless-image-across i acc-i scene-x scene-y)
+  (let ((ih (image-height i))(iw (image-width i))(iha (image-height acc-i))(iwa (image-width acc-i)))
+    (cond
+      ((< iwa (+ scene-x iw)) (create-seamless-wallpaper-from-seamless-image-across i (concat-image-right i acc-i) scene-x scene-y))
+      (else acc-i))))
+
+(define (create-seamless-wallpaper-from-seamless-image-down i acc-i scene-x scene-y)
+  (let ((ih (image-height i))(iw (image-width i))(iha (image-height acc-i))(iwa (image-width acc-i)))
+    (cond
+      ((<  iha (+ scene-y ih)) (create-seamless-wallpaper-from-seamless-image-down i (concat-image-down i acc-i) scene-x scene-y))
+      (else acc-i))))
+
+
+(define (create-seamless-wallpaper-from-seamless-image i b)
+  (let ((scene-x (image-width b)) (scene-y (image-height b))) 
+    (put-pinhole 0 0 (create-seamless-wallpaper-from-seamless-image-across
+     (create-seamless-wallpaper-from-seamless-image-down i i scene-x scene-y)(create-seamless-wallpaper-from-seamless-image-down i i scene-x scene-y)
+     scene-x scene-y))))
+
+(define WALLPAPER-IMAJ (create-seamless-wallpaper-from-seamless-image WALLPAPER-REPEAT BACKGROUND))
+
+(define (place-seamless/v i v b)
+  (let* ((ih (image-height i))(iw (image-width i)) (v-mod (vc (- (modulo (vc-x v) iw) iw) (- (modulo (vc-y v) ih) ih))))
+    (place-image/vc i v-mod b)))
+
+(struct anime (imaj-listesi tik-döngüsü tik-kalan imaj-endeksi))
+
+(define (anime-ilerleme a)
+  (let ((tk (modulo (sub1 (anime-tik-kalan a)) (anime-tik-döngüsü a))))
+    (cond
+      ((zero? tk)
+       (anime
+        (anime-imaj-listesi a)
+        (anime-tik-döngüsü a)
+        (anime-tik-döngüsü a)
+        (modulo (add1 (anime-imaj-endeksi a)) (length (anime-imaj-listesi a)))))
+      (else
+       (anime
+        (anime-imaj-listesi a)
+        (anime-tik-döngüsü a)
+        tk 
+        (anime-imaj-endeksi a))))))
+
+(define (anime-çiz a v b)
+  (place-image/vc (list-ref (anime-imaj-listesi a) (anime-imaj-endeksi a)) v b))
+  
+(define (cisim-animate c)
+  (cond
+    ((anime? (cisim-imaj c)) (struct-copy cisim c [imaj (anime-ilerleme (cisim-imaj c))]))
+    (else c)))
+
+(define (cisim-ilerleme c)
+  (cisim-animate (struct-copy cisim c [yer (+vc (cisim-yer c) (cisim-hız c))] [hız (+vc (cisim-hız c) (cisim-ivme c))])))
+               
+; place-cisim cisim scene -> scene
+; bir sahneye kordinatlarına göre bir cisim yerleştir
+(define (place-cisim c sahne)
+  (let ((ci (cisim-imaj c)))
+  (cond
+    ((anime? ci) (anime-çiz ci (cisim-yer c) sahne))
+    (else  (place-image/vc ci (cisim-yer c) sahne)))))
+
+; place-cisim/top-left cisim scene -> scene
+; bir sahneye kordinatlarına göre bir cisim yerleştir
+(define (place-cisim/top-left c sahne)
+  (place-image/vc/top-left (cisim-imaj c) (cisim-yer c) sahne))
+
+(define (seamless-adjust c iw ih)
+    (let* ((v (cisim-yer c)) (v-mod (vc (- (modulo (vc-x v) iw) iw) (- (modulo (vc-y v) ih) ih))))
+      (cisim (cisim-imaj c) v-mod (cisim-hız c) (cisim-ivme c))))
+               
+(define (cisim-ilerleme/modulo c w h)
+  (seamless-adjust (cisim-ilerleme c) w h))
+               
+
+                                                
+                   
+        
+    
+
+
