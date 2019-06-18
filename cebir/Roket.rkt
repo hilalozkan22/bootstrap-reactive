@@ -12,7 +12,7 @@
 
 ;;;; "Run" tıklanınca aşağıdan girilen bu satır roketin uçmasını sağlayacak
 ;;;; Saniyeleri ilerletmek için boşuk tuşuna basın
-;(başlat roket-yüksekliği)
+(başlat roket-yüksekliği)
 
 
 ;; Bunu çalıştırdıktan sonra "başlat" yerine "uzay" "grafik" yada "hepsi" deneyebilirsin! 

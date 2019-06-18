@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname oyun) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname Oyun) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 
 (require "Teachpacks/bootstrap-teachpack.rkt")
 
@@ -91,14 +91,15 @@
   y)
 
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 4. Çarpışmalar: Oyuncu hedefe veya tehlikeye yeterince yaklaştığında birşey olmalı!
 ;;    Burada "yeterince yakın"ın ne olduğunu bilmemiz gerek, ve nesnelerin birbirinden ne kadar uzak olduğunu bilmeliyiz
 
-;; eğer uzaklık-rengi "yellow" ise program oyuncu ve diğer nesneler arasında sarı bir üçgen çizer.
+;; eğer mesafe-rengi "yellow" ise program oyuncu ve diğer nesneler arasında sarı bir üçgen çizer.
 ;; Bu üçgenin kenarlarında kenar uzunluğu gösterilir
-;; ve uzaklık ta hipotenüzte gösterilir (bu her renkte olur)
-(define *uzaklık-rengi* "")
+;; ve mesafe ta hipotenüzte gösterilir (bu her renkte olur)
+(define *mesafe-rengi* "")
 
 ; çizgi-uzunluğu: Sayı Sayı -> Sayı
 ; Bir sayı ekseni üzerinde iki nokta arasındaki çizginin uzunluğu
@@ -107,19 +108,19 @@
 (define (çizgi-uzunluğu a b)
   0)
   
-; uzaklık : Sayı Sayı Sayı Sayı -> Sayı
-; Ekrandaki iki nokta arasındaki uzaklık
+; mesafe : Sayı Sayı Sayı Sayı -> Sayı
+; Ekrandaki iki nokta arasındaki mesafe
 ; Oyuncunun x ve y, ve bir nesnenin x ve y koordinatları verilmiş
 ; Ne kadar uzaktırlar?
 ; ÖRNEKler:
 
-(define (uzaklık px py cx cy)
+(define (mesafe px py cx cy)
   0)
 
 ; çarğıştı? : Sayı Sayı Sayı Sayı -> Mantıksal
 ; Ne kadar yakın yeterince yakındır?
 ; Oyuncunun x ve y koordinatları ve bir nesnenin x ve y koordinatları verilmiş
-; Ne kadar uzak olduklarına bakıp çarpışıp çarpışmadıklarına karar veririz.
+; Aralarındaki mesafeye bakıp çarpışıp çarpışmadıklarına karar veririz.
 ; Örneklers:
 (define (çarpıştı? px py cx cy)
   false)
@@ -127,8 +128,8 @@
 
 
 ; son bir sır:
-(define gizem (radial-star 5 5 3 "solid" "silver"))
-(define (gizem-güncelle x) 
+(define GİZEMLİ (radial-star 5 25 10 "solid" "silver"))
+(define (gizemli-güncelle x) 
   200)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -139,8 +140,8 @@
                      TEHLİKE tehlike-güncelle
                      HEDEF hedef-güncelle
                      OYUNCU oyuncu-güncelle
-                     gizem gizem-güncelle
-                     mesafeler-göster çizgi-uzunluğu uzaklık
+                     GİZEMLİ gizemli-güncelle
+                     mesafeler-göster çizgi-uzunluğu mesafe
                      çarpıştı? ekranda?))
 
 ;; bu satır oyunu otomatik olarak başlatır...
