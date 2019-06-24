@@ -51,9 +51,9 @@
           (lambda (w scene)
             (overlay/align "middle" "top" 
              (text 
-              (string-append "x-koordinat: " 
+              (string-append "x koordinat: " 
                              (number->string (world-x w))
-                             "   y-koordinat: "
+                             "   y koordinat: "
                              (number->string (world-y w)))
               14 'black)
              scene))))

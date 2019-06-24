@@ -4,6 +4,9 @@
 (require "Teachpacks/bahce-teachpack.ss")
 
 ;; get new well, butterfly, garden pictures choose at random and set coord at random in teachpack...
+(define butterfly (bitmap "Teachpacks/teachpack-images/butterfly-02.png"))
+(define kuyu (bitmap "Teachpacks/teachpack-images/kuyu.png"))
+(define bahçe (bitmap "Teachpacks/teachpack-images/garden.png"))
 
 ;;;; Tanımların burada..bahçe boyutları, marjları
 (define bahçe-genişliği WIDTH)
@@ -60,7 +63,7 @@
 ;; hareket-edebilir-mi? : Sayı Sayı-> Mantıksal
 ;; Kelebek hareket edebilir mi? ?
 
-(define (hareket-edebilir-mi? x y)
+(define (güvende-mi? x y)
   (bahçe-içinde-mi? x y))
 
 ;;;; Animasyon otomatik olarak başlar
@@ -68,7 +71,7 @@
 
 
 
-(start hareket-edebilir-mi?)
+(start güvende-mi?)
 
 
 

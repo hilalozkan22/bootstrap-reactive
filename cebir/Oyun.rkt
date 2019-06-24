@@ -76,7 +76,7 @@
 
 ;; ÖRNEKler:
 
-(define (ekranda? x)
+(define (ekranda-mı? x)
   true)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -122,7 +122,7 @@
 ; Oyuncunun x ve y koordinatları ve bir nesnenin x ve y koordinatları verilmiş
 ; Aralarındaki mesafeye bakıp çarpışıp çarpışmadıklarına karar veririz.
 ; Örneklers:
-(define (çarpıştı? px py cx cy)
+(define (çarpıştı-mı? px py cx cy)
   false)
 
 
@@ -142,7 +142,7 @@
                      OYUNCU oyuncu-güncelle
                      GİZEMLİ gizemli-güncelle
                      mesafeler-göster çizgi-uzunluğu mesafe
-                     çarpıştı? ekranda?))
+                     çarpıştı-mı? ekranda-mı?))
 
 ;; bu satır oyunu otomatik olarak başlatır...
 (play g)
