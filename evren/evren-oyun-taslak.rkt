@@ -1,15 +1,21 @@
 #lang racket
 (require "teachpacks/evren-teachpack.rkt")
 ;(SES "ses/bark.wav")
-;örnek BACKGROUND
+;örnek BACKGROUND (değiştireceksin)
 (define BACKGROUND (rectangle  640 480  "solid" "gray")) 
-;örnek FRAME-RATE
+;örnek FRAME-RATE (değiştireceksin)
 (define FRAME-RATE 12)
-;örnek evren STRUCT tanımı
+;örnek evren STRUCT tanımı (değiştireceksin)
 (STRUCT evren (boş))
-;Boş evren fonksiyonları
+;---------------------------------------------------------------------
+Yeni kodun buraya yerleştir...
 
-;evren-ilerleme evren -> evren
+
+
+;---------------------------------------------------------------------
+;Boş evren fonksiyonları (değiştireceksin)
+
+;evren-ilerleme evren -> evren 
 (define (evren-ilerleme e)
   e)
 
