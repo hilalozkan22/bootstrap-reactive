@@ -1,31 +1,31 @@
 #lang racket
 (require "teachpacks/evren-teachpack.rkt")
-
 ;(SES "ses/bark.wav")
-
-
+;örnek BACKGROUND
 (define BACKGROUND (rectangle  640 480  "solid" "gray")) 
-
+;örnek FRAME-RATE
 (define FRAME-RATE 12)
-
-(STRUCT v (x y))
-
-(ÖRNEK (v 1 2) (v 1 2))
-
+;örnek evren STRUCT tanımı
 (STRUCT evren (boş))
+;Boş evren fonksiyonları
 
+;evren-ilerleme evren -> evren
 (define (evren-ilerleme e)
   e)
 
+;evren-çiz evren -> imaj
 (define (evren-çiz e)
   BACKGROUND)
 
+;evren-tuş evren tuş -> evren
 (define (evren-tuş e t)
   e)
 
-(define (evren-fare e x y m)
+;evren-fare evren sayı sayı fare-hareketi -> evren 
+(define (evren-fare e x y f)
   e)
 
+; ilk evren 
 (define yaradılış (evren 1))
 
 
