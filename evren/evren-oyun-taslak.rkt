@@ -12,7 +12,7 @@
 
 (ÖRNEK (v 1 2) (v 1 2))
 
-(STRUCT evren (x y))
+(STRUCT evren (boş))
 
 (define (evren-ilerleme e)
   e)
@@ -26,10 +26,10 @@
 (define (evren-fare e x y m)
   e)
 
-(define yaradılış (evren 320 240))
+(define yaradılış (evren 1))
 
 
-
+;; bu satırdan sonraki kod sabit kalsın....
 (test)
 
 (big-bang yaradılış
